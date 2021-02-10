@@ -16,3 +16,8 @@ code {
   height: 50%;
   width: 50%;
 }
+
+.leaflet-container {
+  width: 50%;
+  height: 50vh;
+}
