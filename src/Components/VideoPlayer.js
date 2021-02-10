@@ -1,6 +1,8 @@
 import React from "react"
 import { Player } from "video-react"
 import "video-react/dist/video-react.css"
+import { List } from "./ListChapter"
+
 
 export class VideoPlayer extends React.Component {
 
@@ -9,8 +11,14 @@ export class VideoPlayer extends React.Component {
 
         this.state = {
             data_loaded: false,
-            json: []
+            selected : -1,
+            json: [],
+            fields: ["pos", "title"]
         }
+    }
+
+    handleClick(index) {
+        this.setState({ selected : index})
     }
 
     componentDidMount() {
@@ -25,15 +33,23 @@ export class VideoPlayer extends React.Component {
     }
 
     render() {
-        const { data_loaded, json } = this.state
+        const { data_loaded, json, fields } = this.state
 
         if (data_loaded) {
             return (
-                <div id="videoPlayer">
-                    <Player
-                        playsInline
-                        src={json.Film.file_url}
-                    />
+                <div >
+                    <p id="videoPlayer">
+                        <Player
+                            playsInline
+                            src={json.Film.file_url}
+                        />
+                    </p>
+                    <p>
+                        <List
+                        items={json.Chapters}
+                        fields = {fields}
+                        onClick={this.handleClick.bind(this)}/>
+                    </p>
                 </div>
             )
         } else {
