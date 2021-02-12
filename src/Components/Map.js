@@ -1,5 +1,6 @@
 import React from "react"
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import { MapContainer, TileLayer } from 'react-leaflet'
+import { MapMarker } from "./MapMarker"
 import "leaflet/dist/leaflet.css"
 
 export class Map extends React.Component {
@@ -25,18 +26,26 @@ export class Map extends React.Component {
     }
 
     render() {
-        return (
-            <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
-                <TileLayer
-                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                <Marker position={[51.505, -0.09]}>
-                    <Popup>
-                        A pretty CSS3 popup. <br /> Easily customizable.
-                        </Popup>
-                </Marker>
-            </MapContainer>
-        )
+        const { dataLoaded, json } = this.state
+
+        if (dataLoaded) {
+            return (
+                <div id="map">
+                    <MapContainer center={[json.Waypoints[0].lat, json.Waypoints[0].lng]} zoom={13} scrollWheelZoom={false}>
+                        <TileLayer
+                            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        />
+                        <MapMarker
+                            waypoints={json.Waypoints}
+                        />
+                    </MapContainer>
+                </div>
+            )
+        } else {
+            return (
+                <p>Loading data...</p>
+            )
+        }
     }
 }

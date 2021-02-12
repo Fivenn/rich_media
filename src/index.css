@@ -12,12 +12,13 @@ code {
     monospace;
 }
 
-#videoPlayer {
-  height: 50%;
+.leaflet-container {
   width: 50%;
+  height: 50vh;
 }
 
-.leaflet-container {
+aside {
+  float: left;
   width: 50%;
   height: 50vh;
 }

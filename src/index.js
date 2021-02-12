@@ -6,8 +6,12 @@ import { Map } from "./Components/Map"
 
 ReactDOM.render(
   <div>
-    <VideoPlayer/>
-    <Map/>
+    <aside>
+      <VideoPlayer />
+    </aside>
+    <section>
+      <Map />
+    </section>
   </div>,
   document.getElementById("root")
 )
