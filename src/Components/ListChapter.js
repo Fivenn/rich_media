@@ -26,7 +26,7 @@ export class List extends React.Component {
                 {this.props.items.map((item,index) => (
                     <ListChapter
                         title = {item[this.props.fields[1]]}
-                        time = {item[this.props.fields[0]]}
+                        time = {Math.floor(item[this.props.fields[0]]/3600) + " hours " + Math.floor((item[this.props.fields[0]]%3600)/60) + " min " + item[this.props.fields[0]] % 60 + " sec"}
                         key = {index}
                         onClick = {this.handleClick.bind(this, item.pos)}
                         selected = {this.state.selected === index}

@@ -24,12 +24,9 @@ export class VideoPlayer extends React.Component {
     }
 
     handleStateChange(state) {
-
         this.setState({
           player: state
         });
-
-        const { player } = this.player.getState();
       }
 
 
@@ -46,7 +43,6 @@ export class VideoPlayer extends React.Component {
 
     handleClick(index) {
         this.setState({ selected : index})
-        this.seek(index)
     }
 
     render() {
@@ -64,7 +60,7 @@ export class VideoPlayer extends React.Component {
                             src={json.Film.file_url}
                         />
                     </div>
-                    <div id="Chapters">
+                    <div id="chapters">
                         <List
                         items={json.Chapters}
                         fields = {fields}
