@@ -15,11 +15,23 @@ export class VideoPlayer extends React.Component {
             json: [],
             fields: ["pos", "title"]
         }
+
+        this.seek = this.seek.bind(this);
     }
 
-    handleClick(index) {
-        this.setState({ selected : index})
+    seek(seconds) {
+        this.player.seek(seconds);
     }
+
+    handleStateChange(state) {
+
+        this.setState({
+          player: state
+        });
+
+        const { player } = this.player.getState();
+      }
+
 
     componentDidMount() {
         fetch("https://imr3-react.herokuapp.com/backend")
@@ -32,24 +44,32 @@ export class VideoPlayer extends React.Component {
             })
     }
 
+    handleClick(index) {
+        this.setState({ selected : index})
+        this.seek(index)
+    }
+
     render() {
         const { data_loaded, json, fields } = this.state
 
         if (data_loaded) {
             return (
                 <div >
-                    <p id="videoPlayer">
+                    <div id="videoPlayer">
                         <Player
+                            ref={player => {
+                                this.player = player;
+                            }}
                             playsInline
                             src={json.Film.file_url}
                         />
-                    </p>
-                    <p>
+                    </div>
+                    <div id="Chapters">
                         <List
                         items={json.Chapters}
                         fields = {fields}
-                        onClick={this.handleClick.bind(this)}/>
-                    </p>
+                        onClick={this.seek.bind(this)}/>
+                    </div>
                 </div>
             )
         } else {

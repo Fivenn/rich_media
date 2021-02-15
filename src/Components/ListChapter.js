@@ -1,5 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
+import { Button } from 'react-bootstrap';
+
 
 export class List extends React.Component {
     static propTypes = {
@@ -15,7 +17,7 @@ export class List extends React.Component {
         }
     }
 
-    handleClick(index) {
+    handleClick(index, time) {
         this.setState({selected : index});
         this.props.onClick(index);
     }
@@ -24,10 +26,10 @@ export class List extends React.Component {
             <ul>
                 {this.props.items.map((item,index) => (
                     <ListChapter
-                        line_1 = {item[this.props.fields[0]]}
-                        line_2 = {item[this.props.fields[1]]}
+                        title = {item[this.props.fields[1]]}
+                        time = {item[this.props.fields[0]]}
                         key = {index}
-                        onClick = {this.handleClick.bind(this, index)}
+                        onClick = {this.handleClick.bind(this, item.pos)}
                         selected = {this.state.selected === index}
                     />
                 ))}
@@ -39,15 +41,15 @@ export class List extends React.Component {
 export class ListChapter extends React.Component {
     static defaultProps = {
         selected: false,
-        line_1: "temps inconnu",
-        line_2: "chapitre inconnu"
+        title: "chapitre inconnu",
+        time: "temps inconnu"
     };
 
     static propTypes = {
-        line_1: PropTypes.string.isRequired,
-        line_2: PropTypes.number,
+        title: PropTypes.string.isRequired,
+        time: PropTypes.string,
         onClick: PropTypes.func.isRequired,
-        selected: PropTypes.string
+        selected: PropTypes.bool
     };
 
     toggle = () =>{
@@ -57,8 +59,8 @@ export class ListChapter extends React.Component {
     render() {
         return (
         <div className={`${this.props.selected ? "on" : "off"}`} onClick={this.toggle}>
-            <h2>{this.props.line_1}</h2>
-            <h3>{this.props.line_2}</h3>
+            <h2>Chapter : {this.props.title}</h2>
+            <h3>Timecode : {this.props.time}</h3>
         </div>
         )
     }

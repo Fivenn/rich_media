@@ -4,6 +4,6 @@ import "./index.css"
 import { VideoPlayer } from "./Components/VideoPlayer"
 
 ReactDOM.render(
-  <VideoPlayer/>,
+    <VideoPlayer />,
   document.getElementById("root")
 )
