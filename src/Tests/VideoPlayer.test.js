@@ -1,7 +1,6 @@
 import React from "react"
 import { render, waitFor } from "@testing-library/react"
 import { VideoPlayer } from "../Components/VideoPlayer"
-import { Video } from "video-react"
 
 beforeAll(() => {
     jest.spyOn(global, "fetch").mockImplementation(() => {
