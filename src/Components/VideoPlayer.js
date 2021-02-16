@@ -35,7 +35,7 @@ export class VideoPlayer extends React.Component {
             .then(res => res.json())
             .then(json => {
                 this.setState({
-                    data_loaded: true,
+                    dataLoaded: true,
                     json: json
                 })
             })
@@ -46,9 +46,9 @@ export class VideoPlayer extends React.Component {
     }
 
     render() {
-        const { data_loaded, json, fields } = this.state
+        const { dataLoaded, json, fields } = this.state
 
-        if (data_loaded) {
+        if (dataLoaded) {
             return (
                 <div >
                     <div id="videoPlayer">
