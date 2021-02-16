@@ -29,6 +29,7 @@ export class MapMarker extends React.Component {
 
     render() {
         return (
+            // Uses the given json from Map component to set markers
             this.props.waypoints.map((waypoint) => (
                 <Marker position={[waypoint.lat, waypoint.lng]}>
                     <Popup>
