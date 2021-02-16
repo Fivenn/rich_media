@@ -1,6 +1,8 @@
 import React from "react"
 import { Player } from "video-react"
 import "video-react/dist/video-react.css"
+import { List } from "./ListChapter"
+
 
 export class VideoPlayer extends React.Component {
 
@@ -8,10 +10,25 @@ export class VideoPlayer extends React.Component {
         super(props)
 
         this.state = {
-            dataLoaded: false,
-            json: []
+            data_loaded: false,
+            selected : -1,
+            json: [],
+            fields: ["pos", "title"]
         }
+
+        this.seek = this.seek.bind(this);
     }
+
+    seek(seconds) {
+        this.player.seek(seconds);
+    }
+
+    handleStateChange(state) {
+        this.setState({
+          player: state
+        });
+      }
+
 
     componentDidMount() {
         fetch("https://imr3-react.herokuapp.com/backend")
@@ -24,16 +41,31 @@ export class VideoPlayer extends React.Component {
             })
     }
 
+    handleClick(index) {
+        this.setState({ selected : index})
+    }
+
     render() {
-        const { dataLoaded, json } = this.state
+        const { dataLoaded, json, fields } = this.state
 
         if (dataLoaded) {
             return (
-                <div id="videoPlayer">
-                    <Player
-                        playsInline
-                        src={json.Film.file_url}
-                    />
+                <div >
+                    <div id="videoPlayer">
+                        <Player
+                            ref={player => {
+                                this.player = player;
+                            }}
+                            playsInline
+                            src={json.Film.file_url}
+                        />
+                    </div>
+                    <div id="chapters">
+                        <List
+                        items={json.Chapters}
+                        fields = {fields}
+                        onClick={this.seek.bind(this)}/>
+                    </div>
                 </div>
             )
         } else {
