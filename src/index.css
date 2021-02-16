@@ -22,3 +22,19 @@ aside {
   width: 50%;
   height: 50vh;
 }
+
+.on {
+  background-color: cornflowerblue;
+}
+
+.on:hover {
+  background-color: lavender;
+}
+
+.off {
+  background-color: transparent;
+}
+
+.off:hover {
+  background-color: lavender;
+}
