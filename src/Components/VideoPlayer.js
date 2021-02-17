@@ -16,9 +16,13 @@ export class VideoPlayer extends React.Component {
             fields: ["pos", "title"]
         }
 
+        //Declare seek function in this context
         this.seek = this.seek.bind(this);
     }
 
+    /* Declaration of function seek
+     * seek video by time (seconds)
+     */
     seek(seconds) {
         this.player.seek(seconds);
     }
@@ -64,6 +68,7 @@ export class VideoPlayer extends React.Component {
                         <List
                         items={json.Chapters}
                         fields = {fields}
+                        //add seek function on the click
                         onClick={this.seek.bind(this)}/>
                     </div>
                 </div>

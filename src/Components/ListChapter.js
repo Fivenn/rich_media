@@ -1,7 +1,10 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-
+/**
+ * Class allowing to generate and display a list of chapters from the video. 
+ * This list is displayed using a json file. 
+ */
 export class List extends React.Component {
     static propTypes = {
         items: PropTypes.array.isRequired,
@@ -37,6 +40,10 @@ export class List extends React.Component {
     }
 }
 
+/**
+ * Class allowing to generate and display chapters from the video. 
+ * These chapters is displayed using a json file. 
+ */
 export class ListChapter extends React.Component {
     static defaultProps = {
         selected: false,
